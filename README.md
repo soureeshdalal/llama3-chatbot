@@ -31,5 +31,5 @@ python app.py
 - `requirements.txt` - Dependencies required for running the project.
 
 ## Model Deployment
-The model is deployed on Hugging Face and can be accessed here: [Llama 3 Fine-Tuned Model](https://huggingface.co/soureesh1211/finetuned-llama3)
+The model is deployed on Hugging Face and can be accessed here: ([https://huggingface.co/soureesh1211/finetuned-llama3](https://huggingface.co/spaces/soureesh1211/finetuned-llama3-chatbot))
 
