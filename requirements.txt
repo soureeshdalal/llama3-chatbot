@@ -1,0 +1,6 @@
+transformers
+torch
+gradio
+accelerate>=0.26.0
+huggingface_hub
+peft
