@@ -1,10 +1,10 @@
-<h1>🚀 Fine-Tuned LLaMA 3.2 Chatbot</h1>
+<h1>Fine-Tuned LLaMA 3.2 Chatbot</h1>
 
 <p>This project fine-tunes the <strong>LLaMA 3.2-3B Instruct</strong> model to create a lightweight yet powerful AI chatbot. The model has been trained using <strong>LoRA (Low-Rank Adaptation)</strong> for efficient fine-tuning and then merged for deployment. The chatbot is deployed on <strong>Hugging Face Spaces</strong> using <strong>Gradio</strong>.</p>
 
 <hr>
 
-<h2>📝 Table of Contents</h2>
+<h2>Table of Contents</h2>
 <ul>
   <li><a href="#overview">Overview</a></li>
   <li><a href="#features">Features</a></li>
@@ -18,7 +18,7 @@
 
 <hr>
 
-<h2 id="overview">📌 Overview</h2>
+<h2 id="overview">Overview</h2>
 <p>This project fine-tunes <strong>Meta’s LLaMA 3.2-3B Instruct</strong> model using <strong>LoRA</strong>, making it suitable for a chatbot that provides meaningful and context-aware responses. The model is <strong>optimized for inference on consumer GPUs</strong> and deployed on Hugging Face Spaces.</p>
 
 <ul>
@@ -31,7 +31,7 @@
 
 <hr>
 
-<h2 id="features">✨ Features</h2>
+<h2 id="features"> Features</h2>
 <ul>
   <li>✅ Fine-tuned for <strong>natural conversations</strong></li>
   <li>✅ Supports <strong>low VRAM</strong> inference (merged LoRA)</li>
@@ -42,7 +42,7 @@
 
 <hr>
 
-<h2 id="model-details">🧠 Model Details</h2>
+<h2 id="model-details">Model Details</h2>
 <ul>
   <li><strong>Base Model:</strong> <code>unsloth/Llama-3.2-3B-Instruct</code></li>
   <li><strong>Fine-Tuned Model Repo:</strong> <a href="https://huggingface.co/soureesh1211/finetuned-llama3">soureesh1211/finetuned-llama3</a></li>
@@ -53,7 +53,7 @@
 
 <hr>
 
-<h2 id="setup-installation">⚙️ Setup & Installation</h2>
+<h2 id="setup-installation">⚙Setup & Installation</h2>
 
 <h3>1️⃣ Clone the repository:</h3>
 <pre><code>git clone https://github.com/soureesh1211/finetuned-llama3-chatbot.git
@@ -67,7 +67,7 @@ cd finetuned-llama3-chatbot</code></pre>
 
 <hr>
 
-<h2 id="usage">🚀 Usage</h2>
+<h2 id="usage">Usage</h2>
 <p>Once the chatbot is running, you can interact with it through the <strong>Gradio UI</strong>.</p>
 
 <ol>
@@ -81,7 +81,7 @@ AI: Fine-tuning a transformer involves training it on a domain-specific dataset 
 
 <hr>
 
-<h2 id="deployment">🌍 Deployment</h2>
+<h2 id="deployment"> Deployment</h2>
 <p>The chatbot is <strong>deployed on Hugging Face Spaces</strong>.</p>
 
 <h3>To deploy manually:</h3>
@@ -99,7 +99,7 @@ AI: Fine-tuning a transformer involves training it on a domain-specific dataset 
 
 <hr>
 
-<h2 id="repository-structure">📂 Repository Structure</h2>
+<h2 id="repository-structure">Repository Structure</h2>
 
 <pre><code>📦 finetuned-llama3-chatbot
  ┣ 📜 app.py                   # Gradio chatbot script
@@ -109,20 +109,4 @@ AI: Fine-tuning a transformer involves training it on a domain-specific dataset 
 
 <hr>
 
-<h2 id="acknowledgments">🙌 Acknowledgments</h2>
-<ul>
-  <li>🎯 <strong>Meta AI</strong> for LLaMA 3.2</li>
-  <li>🎯 <strong>Hugging Face</strong> for the <code>transformers</code> and <code>peft</code> libraries</li>
-  <li>🎯 <strong>Gradio</strong> for the UI framework</li>
-</ul>
 
-<hr>
-
-<h2>📢 Contributing</h2>
-<p>Contributions are welcome! Open an issue or submit a pull request.</p>
-
----
-
-This **HTML-formatted README** will **render perfectly on GitHub**, keeping all the structure and styling neat. 🎯
-
-Would you like any modifications or additions? 🚀
