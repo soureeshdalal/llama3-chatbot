@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<h1 align="left">🚀 Fine-Tuned Llama 3.2 Chatbot</h1>
+<h1 align="left">Fine-Tuned Llama 3.2 Chatbot</h1>
 <p align="left">
     A powerful chatbot fine-tuned on <strong>Llama 3.2</strong>, optimized for advanced code generation, debugging, and explanation.
 </p>
