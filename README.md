@@ -1,112 +1,132 @@
-<h1>Fine-Tuned LLaMA 3.2 Chatbot</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fine-Tuned Llama 3.2 Chatbot</title>
+</head>
+<body>
 
-<p>This project fine-tunes the <strong>LLaMA 3.2-3B Instruct</strong> model to create a lightweight yet powerful AI chatbot. The model has been trained using <strong>LoRA (Low-Rank Adaptation)</strong> for efficient fine-tuning and then merged for deployment. The chatbot is deployed on <strong>Hugging Face Spaces</strong> using <strong>Gradio</strong>.</p>
+<h1 align="left">Fine-Tuned Llama 3.2 Chatbot</h1>
+<p align="left">
+    A powerful chatbot fine-tuned on <strong>Llama 3.2</strong>, enhanced with <strong>Hybrid RAG (Retrieval-Augmented Generation)</strong> and optimized for advanced code generation, debugging, and explanation.
+</p>
 
-<hr>
+---
 
-<h2>Table of Contents</h2>
+<h2> Overview</h2>
+<p>
+This project fine-tunes the <strong>Llama 3.2</strong> model for enhanced reasoning, programming assistance, and contextual awareness. Unlike standard fine-tuning, this approach integrates **Hybrid RAG (BM25 + ChromaDB embeddings)** for a more dynamic and knowledge-enhanced chatbot experience.
+</p>
+
+<h3> Standout Features:</h3>
 <ul>
-  <li><a href="#overview">Overview</a></li>
-  <li><a href="#features">Features</a></li>
-  <li><a href="#model-details">Model Details</a></li>
-  <li><a href="#setup-installation">Setup & Installation</a></li>
-  <li><a href="#usage">Usage</a></li>
-  <li><a href="#deployment">Deployment</a></li>
-  <li><a href="#repository-structure">Repository Structure</a></li>
-  <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li> <strong>Fine-Tuned on Python Code Datasets</strong> - Trained on **CodeAlpaca-20k** and other Python-centric datasets.</li>
+    <li><strong>Hybrid RAG Implementation</strong> - Combines **BM25 Sparse Retrieval** with **Dense ChromaDB Embeddings**.</li>
+    <li> <strong>Optimized for Limited Compute</strong> - JAX-based fine-tuning with **Colab T4 GPU constraints in mind**.</li>
+    <li><strong>Context-Aware Generation</strong> - RAG-enhanced responses for **complex Python questions**.</li>
+    <li><strong>Cloud Deployment</strong> - Hosted on **Hugging Face Spaces** for easy access and inference.</li>
 </ul>
 
-<hr>
-
-<h2 id="overview">Overview</h2>
-<p>This project fine-tunes <strong>Meta’s LLaMA 3.2-3B Instruct</strong> model using <strong>LoRA</strong>, making it suitable for a chatbot that provides meaningful and context-aware responses. The model is <strong>optimized for inference on consumer GPUs</strong> and deployed on Hugging Face Spaces.</p>
-
+<h3>Model Details:</h3>
 <ul>
-  <li><strong>Model:</strong> Fine-tuned LLaMA 3.2-3B with LoRA</li>
-  <li><strong>Frameworks:</strong> Hugging Face <code>transformers</code>, <code>peft</code>, <code>gradio</code></li>
-  <li><strong>Training Method:</strong> Parameter-efficient fine-tuning (LoRA)</li>
-  <li><strong>Deployment:</strong> Hugging Face Spaces</li>
-  <li><strong>Inference:</strong> Uses <code>AutoModelForCausalLM</code> from <code>transformers</code></li>
+    <li><strong>Base Model:</strong> Llama 3.2</li>
+    <li><strong>Fine-Tuning Method:</strong> Full Model Fine-Tuning (JAX-based approach)</li>
+    <li><strong>VectorDB:</strong> <a href="https://github.com/chroma-core/chroma">ChromaDB</a> + BM25 Hybrid Search</li>
+    <li><strong>Deployment:</strong> Hugging Face Spaces</li>
+    <li><strong>Use Cases:</strong> Code Generation, Debugging, Code Explanation, and RAG-based Queries</li>
 </ul>
 
-<hr>
+---
 
-<h2 id="features"> Features</h2>
+<h2>Model & RAG Files</h2>
+<p>The following files are included in the repository:</p>
+<table>
+    <tr>
+        <th>File</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td><code>config.json</code></td>
+        <td>Model configuration file</td>
+    </tr>
+    <tr>
+        <td><code>tokenizer.json</code></td>
+        <td>Tokenizer settings and vocabulary</td>
+    </tr>
+    <tr>
+        <td><code>model.safetensors</code></td>
+        <td>Fine-tuned model weights</td>
+    </tr>
+    <tr>
+        <td><code>chroma_db/</code></td>
+        <td>VectorDB files storing RAG embeddings</td>
+    </tr>
+    <tr>
+        <td><code>README.md</code></td>
+        <td>Project documentation</td>
+    </tr>
+</table>
+
+---
+
+<h2>Installation & Setup</h2>
+<h3>1. Install Dependencies</h3>
+<p>Ensure you have the required packages installed:</p>
+<pre>
+pip install transformers torch gradio chromadb huggingface_hub safetensors faiss-cpu
+</pre>
+
+<h3>2. Load the Fine-Tuned Model</h3>
+<p>Use the following script to load the **Llama 3.2** fine-tuned model:</p>
+
+<pre>
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+# Load fine-tuned model
+model_repo = "soureesh1211/finetuned-llama3"
+model = AutoModelForCausalLM.from_pretrained(model_repo, torch_dtype=torch.float16, device_map="auto")
+tokenizer = AutoTokenizer.from_pretrained(model_repo)
+</pre>
+
+<h3>3. Run Inference</h3>
+<pre>
+input_text = "How do I create a class in Python?"
+inputs = tokenizer(input_text, return_tensors="pt").to(model.device)
+outputs = model.generate(**inputs, max_new_tokens=100)
+response = tokenizer.decode(outputs[0], skip_special_tokens=True)
+
+print("Response:", response)
+</pre>
+
+---
+
+<h2>Running the Chatbot</h2>
+<p>A <strong>Gradio-based chatbot</strong> has been deployed for easy interaction with the fine-tuned model.</p>
+
+<h3>1. Clone the Repository</h3>
+<pre>
+git clone https://huggingface.co/spaces/soureesh1211/finetuned-llama3-chatbot
+cd finetuned-llama3-chatbot
+</pre>
+
+<h3>2. Install Dependencies</h3>
+<pre>
+pip install -r requirements.txt
+</pre>
+
+<h3>3. Run the Chatbot</h3>
+<pre>
+python app.py
+</pre>
+
+---
+
+<h2>Hugging Face Model & Space</h2>
 <ul>
-  <li>✅ Fine-tuned for <strong>natural conversations</strong></li>
-  <li>✅ Supports <strong>low VRAM</strong> inference (merged LoRA)</li>
-  <li>✅ Optimized for <strong>Hugging Face Spaces deployment</strong></li>
-  <li>✅ Lightweight <strong>Gradio UI</strong> for user interaction</li>
-  <li>✅ Uses <strong>Hybrid Search RAG</strong> for enhanced responses (if enabled)</li>
+    <li><strong>Fine-Tuned Model:</strong> <a href="https://huggingface.co/soureesh1211/finetuned-llama3">soureesh1211/finetuned-llama3</a></li>
+    <li><strong>Live Chatbot:</strong> <a href="https://huggingface.co/spaces/soureesh1211/finetuned-llama3-chatbot">Hugging Face Space</a></li>
 </ul>
 
-<hr>
-
-<h2 id="model-details">Model Details</h2>
-<ul>
-  <li><strong>Base Model:</strong> <code>unsloth/Llama-3.2-3B-Instruct</code></li>
-  <li><strong>Fine-Tuned Model Repo:</strong> <a href="https://huggingface.co/soureesh1211/finetuned-llama3">soureesh1211/finetuned-llama3</a></li>
-  <li><strong>Training Method:</strong> LoRA fine-tuning with PEFT</li>
-  <li><strong>Tokenizer:</strong> LLaMA 3.2 tokenizer</li>
-</ul>
-<p>The fine-tuned model has been <strong>merged with LoRA</strong> to allow standalone inference without additional adapters.</p>
-
-<hr>
-
-<h2 id="setup-installation">⚙Setup & Installation</h2>
-
-<h3>1️⃣ Clone the repository:</h3>
-<pre><code>git clone https://github.com/soureesh1211/finetuned-llama3-chatbot.git
-cd finetuned-llama3-chatbot</code></pre>
-
-<h3>2️⃣ Install dependencies:</h3>
-<pre><code>pip install -r requirements.txt</code></pre>
-
-<h3>3️⃣ Run the chatbot:</h3>
-<pre><code>python app.py</code></pre>
-
-<hr>
-
-<h2 id="usage">Usage</h2>
-<p>Once the chatbot is running, you can interact with it through the <strong>Gradio UI</strong>.</p>
-
-<ol>
-  <li><strong>Enter a prompt</strong> in the text box</li>
-  <li><strong>Submit</strong> and wait for the model to generate a response</li>
-  <li><strong>View the response</strong> in the output box</li>
-</ol>
-
-<pre><code>User: How do I fine-tune a transformer model?
-AI: Fine-tuning a transformer involves training it on a domain-specific dataset using techniques like LoRA, full fine-tuning, or adapters...</code></pre>
-
-<hr>
-
-<h2 id="deployment"> Deployment</h2>
-<p>The chatbot is <strong>deployed on Hugging Face Spaces</strong>.</p>
-
-<h3>To deploy manually:</h3>
-
-<pre><code>git push https://huggingface.co/spaces/soureesh1211/finetuned-llama3-chatbot</code></pre>
-
-<p><strong>Ensure the following files are present in the Hugging Face Space:</strong></p>
-<ul>
-  <li><code>app.py</code> (Gradio app)</li>
-  <li><code>requirements.txt</code> (Dependencies)</li>
-  <li><code>README.md</code> (Project documentation)</li>
-</ul>
-
-<p>The chatbot should <strong>automatically build & launch</strong> 🚀.</p>
-
-<hr>
-
-<h2 id="repository-structure">Repository Structure</h2>
-
-<pre><code>📦 finetuned-llama3-chatbot
- ┣ 📜 app.py                   # Gradio chatbot script
- ┣ 📜 requirements.txt         # Required dependencies
- ┣ 📜 README.md                # Project documentation
- ┗ 📜 .gitignore               # Ignore unnecessary files</code></pre>
-
-<hr>
-
-
+---
