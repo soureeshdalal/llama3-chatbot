@@ -1,6 +1,6 @@
 # 💬 Fine-Tuned Llama 3 Model
 
-<p align="center">
+<p align="left">
   <a href="https://huggingface.co/spaces/soureesh1211/finetuned-llama3-chatbot">
     <img src="https://img.shields.io/badge/🤗-Open%20in%20Spaces-blue.svg" alt="Open in Spaces">
   </a>
